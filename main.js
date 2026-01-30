@@ -27,11 +27,7 @@ const allData = JSON.parse(localStorage.getItem('data'));
 let time = 30;
 let score = 0;
 let currentTarget = null;
-
-let targetData = [
-    taret1x = null,
-    taret1y = null,
-]
+let earlyGameStart = false;
 
 // CANVAS
 const canvas = document.getElementById('canvas');
@@ -145,8 +141,8 @@ class targetClass {
     constructor() {
         this.x = 0;
         this.y = 0;
-        this.isVisible = true;
-        this.visibleTime = 300;
+        this.isVisible = false;
+        this.visibleTime = 0;
         this.useTargetImage = currentTarget;
     }
 
@@ -171,8 +167,8 @@ class targetClass2 {
     constructor() {
         this.x = 0;
         this.y = 0;
-        this.isVisible = true;
-        this.visibleTime = 300;
+        this.isVisible = false;
+        this.visibleTime = 0;
         this.useTargetImage = currentTarget;
     }
 
@@ -367,6 +363,38 @@ canvas.addEventListener('click', (event) => {
     }
 });
 
+function isTabrakan(x, y, targetSize = 150) {
+    // Cek dengan drawTarget
+    if (drawTarget.isVisible && Math.abs(x - drawTarget.x) < targetSize && Math.abs(y - drawTarget.y) < targetSize) {
+        return true;
+    }
+    // Cek dengan drawTarget2
+    if (drawTarget2.isVisible && Math.abs(x - drawTarget2.x) < targetSize && Math.abs(y - drawTarget2.y) < targetSize) {
+        return true;
+    }
+    // Cek dengan drawTarget3
+    if (drawTarget3.isVisible && Math.abs(x - drawTarget3.x) < targetSize && Math.abs(y - drawTarget3.y) < targetSize) {
+        return true;
+    }
+
+    return false;
+}
+
+function generateRandomKordinat() {
+    let x;
+    let y;
+    let countLooping = 0;
+
+    do {
+        x = Math.floor(Math.random() * (900 - 100 + 1)) + 100;
+        y = Math.floor(Math.random() * (450 - 100 + 1)) + 50;
+
+        countLooping++
+    } while (isTabrakan(x, y) && countLooping < 100);
+
+    return {x, y};
+}
+
 // COUNTDOWN
 function startCountdown() {
     isCountingDown = true;
@@ -385,6 +413,7 @@ function startCountdown() {
             clearInterval(countdownInterval);
             countdownElement.classList.add('hide');
             isCountingDown = false;
+            earlyGameStart = true;
             startTimer();
         }
     }, 1000);
@@ -403,30 +432,33 @@ function startTimer() {
             gameOverMenu.classList.remove('hide');
         }
 
+        if (earlyGameStart) {
+            let kordinat = generateRandomKordinat();
+            let kordinat2 = generateRandomKordinat();
+            let kordinat3 = generateRandomKordinat();
+            drawTarget.show(kordinat.x, kordinat.y);
+            drawTarget2.show(kordinat2.x, kordinat2.y);
+            drawTarget3.show(kordinat3.x, kordinat3.y);
+            earlyGameStart = false;
+        }
+
         if (time % 5 === 0 && isGameRunning && !isGameOver) {
-            let x = Math.floor(Math.random() * (900 - 100 + 1)) + 100;
-            let y = Math.floor(Math.random() * (500 - 100 + 1)) + 100;
-            drawTarget.show(x, y)
+            earlyGameStart = false;
+            let kordinat = generateRandomKordinat();
+            console.log(kordinat);
+            drawTarget.show(kordinat.x, kordinat.y)
         }
         if (time % 5 === 0 && isGameRunning && !isGameOver) {
-            let x = Math.floor(Math.random() * (900 - 100 + 1)) + 100;
-            let y = Math.floor(Math.random() * (500 - 100 + 1)) + 100;
-            let x2 = Math.floor(Math.random() * (900 - 100 + 1)) + 100;
-            let y2 = Math.floor(Math.random() * (500 - 100 + 1)) + 100;
-            drawTarget2.show(x, y)
-            if (drawTarget.isVisible && drawTarget2.x >= drawTarget.x && drawTarget2.x >= drawTarget.x + 150 && drawTarget2.y >= drawTarget.y && drawTarget2.y >= drawTarget.y + 150) {
-                drawTarget2.show(x2, y2);
-            }
+            earlyGameStart = false;
+            let kordinat = generateRandomKordinat();
+            console.log(kordinat);
+            drawTarget2.show(kordinat.x, kordinat.y)
         }
         if (time % 5 === 0 && isGameRunning && !isGameOver) {
-            let x = Math.floor(Math.random() * (900 - 100 + 1)) + 100;
-            let y = Math.floor(Math.random() * (500 - 100 + 1)) + 100;
-            let x2 = Math.floor(Math.random() * (900 - 100 + 1)) + 100;
-            let y2 = Math.floor(Math.random() * (500 - 100 + 1)) + 100;
-            drawTarget3.show(x, y)
-            if (drawTarget.isVisible && drawTarget2.isVisible && drawTarget3.x >= drawTarget.x && drawTarget3.x >= drawTarget2.x && drawTarget3.x >= drawTarget.x + 150 && drawTarget3.x >= drawTarget2.x + 150 && drawTarget3.y >= drawTarget.y && drawTarget3.y >= drawTarget2.y && drawTarget3.y >= drawTarget.y + 150 && drawTarget3.y >= drawTarget2.y + 150) {
-                drawTarget3.show(x2, y2);
-            }
+            earlyGameStart = false;
+            let kordinat = generateRandomKordinat();
+            console.log(kordinat);
+            drawTarget3.show(kordinat.x, kordinat.y)
             
         }
     }, 1000)
@@ -443,6 +475,17 @@ function RunGame() {
     drawTarget.draw();
     drawTarget2.draw();
     drawTarget3.draw();
+
+    if (earlyGameStart) {
+        let kordinat = generateRandomKordinat();
+        let kordinat2 = generateRandomKordinat();
+        let kordinat3 = generateRandomKordinat();
+        drawTarget.show(kordinat.x, kordinat.y);
+        drawTarget2.show(kordinat2.x, kordinat2.y);
+        drawTarget3.show(kordinat3.x, kordinat3.y);
+        earlyGameStart = false;
+    }
+    
     drawGun.draw();
     drawBoom.draw();
     drawPointer.draw();
