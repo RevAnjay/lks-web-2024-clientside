@@ -28,6 +28,7 @@ let time = 30;
 let score = 0;
 let currentTarget = null;
 let earlyGameStart = false;
+let penguranganWaktu = false;
 
 // CANVAS
 const canvas = document.getElementById('canvas');
@@ -344,22 +345,18 @@ canvas.addEventListener('click', (event) => {
         mouseY >= drawTarget.y && mouseY <= drawTarget.y + 150) {
         score += 10; // Tambah skor
         drawTarget.isVisible = false; // Sembunyikan target
-    }
-
-    // Cek collision dengan target 2
-    if (drawTarget2.isVisible && 
+    } else if (drawTarget2.isVisible && 
         mouseX >= drawTarget2.x && mouseX <= drawTarget2.x + 150 &&
         mouseY >= drawTarget2.y && mouseY <= drawTarget2.y + 150) {
         score += 10;
         drawTarget2.isVisible = false;
-    }
-
-    // Cek collision dengan target 3
-    if (drawTarget3.isVisible && 
+    } else if (drawTarget3.isVisible && 
         mouseX >= drawTarget3.x && mouseX <= drawTarget3.x + 150 &&
         mouseY >= drawTarget3.y && mouseY <= drawTarget3.y + 150) {
         score += 10;
         drawTarget3.isVisible = false;
+    } else {
+        penguranganWaktu = true;
     }
 });
 
@@ -422,8 +419,13 @@ function startCountdown() {
 // TIMER
 function startTimer() {
     setInterval(() => {
-        if (time > 0 && !isPaused && isGameRunning && !isCountingDown) {
+        if (time > 0 && !isPaused && isGameRunning && !isCountingDown && !penguranganWaktu) {
             time--
+        }
+
+        if (penguranganWaktu) {
+            time = time - 5;
+            penguranganWaktu = false;
         }
         
         if (time <= 0 && isGameRunning && !isGameOver) {
