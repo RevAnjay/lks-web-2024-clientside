@@ -1,0 +1,231 @@
+* {
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+body {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    color: black;
+}
+
+.main-menu {
+    width: 20rem;
+    text-align: center;
+    padding: 0 2rem;
+    place-items: center;
+}
+
+.input {
+    background: gray;
+    font-size: 18px;
+    padding: 5px 10px;
+    width: 100%;
+    color: black;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.custom-input {
+    display: flex;
+    align-items: center;
+    position: relative;
+    max-width: 100%;
+    margin-top: 2rem;
+}
+
+.custom-select {
+    position: relative;
+}
+
+.custom-select select {
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    background-color: gray;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid black;
+    font-size: 18px;
+    width: 100%;
+    padding: 5px 10px 5px 10px;
+    margin-top: 5px;
+}
+
+.score-box{
+    width: 100%;
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: center;
+    background-color: black;
+    color: white;
+}
+
+.gun {
+    display: flex;
+    margin-top: 1rem;
+}
+
+.gun1 {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.gun2 {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 1rem;
+}
+
+.target {
+    display: flex;
+    margin-top: 1rem;
+}
+
+.target-1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.target-2-3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 1rem;
+}
+
+.menu-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.button-play {
+    padding: 0.5rem 2rem;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    background-color: green;
+}
+
+.button-instructions {
+    padding: 0.5rem 2rem;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    background-color: blue;
+    margin-left: 1rem;
+}
+
+.hide {
+    display: none !important;
+}
+
+.intruction{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 30px;
+    width: 50vw;
+    height: 60vh;
+    padding: 2rem;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+.pause {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 30px;
+    width: 60vw;
+    height: 70vh;
+    padding: 2rem;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 99999;
+    position: absolute;
+}
+
+.continue-button {
+    padding: 0.5rem 2rem;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    background-color: green;
+    margin-top: 45vh;
+    font-size: 50px;
+}
+
+.close-button {
+    position: absolute;
+    top: 170px;
+    right: 310px;
+    width: 30px;
+    height: 30px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.game-over {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 30px;
+    width: 60vw;
+    height: 70vh;
+    padding: 2rem;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 99999;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.return-button {
+    padding: 0.5rem 2rem;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    background-color: green;
+    font-size: 50px;
+    margin-top: auto;
+}
+
+canvas {
+    cursor: none;
+}
+
+.game-container {
+    display: flex;
+}
+
+.countdown {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.countdown-number {
+    font-size: 150px;
+    font-weight: bold;
+    color: white;
+    font-family: Arial, sans-serif;
+}

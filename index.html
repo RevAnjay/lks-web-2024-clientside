@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="main-menu">
+        <img src="assets/shooter.png" alt="Main Shooter">
+        <div class="custom-input">
+            <input class="input" type="text" name="username" id="username" placeholder="Input your username">
+        </div>
+        <div class="custom-select">
+            <select name="level" id="level">
+                <option disabled selected value="">Select Level</option>
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+        </div>
+        <div class="gun">
+            <div class="gun1">
+                <label for="gun1">
+                    <img src="assets/gun1.png" alt="Gun 1" height="150">
+                </label>
+                <input type="radio" name="gun" id="gun1" value="1">
+            </div>
+            <div class="gun2">
+                <label for="gun2">
+                    <img src="assets/gun2.png" alt="Gun 2" height="150">
+                </label>
+                <input type="radio" name="gun" id="gun2" value="2">
+            </div>
+        </div>
+        <div class="target">
+            <div class="target-1">
+                <label for="target1">
+                    <img src="/assets/target1.png" alt="target1" height="100">
+                </label>
+                <input type="radio" name="target" id="target1" value="1">
+            </div>
+            <div class="target-2-3">
+                <label for="target2">
+                    <img src="/assets/target2.png" alt="target2" height="100">
+                </label>
+                <input type="radio" name="target" id="target2" value="2">
+            </div>
+            <div class="target-2-3">
+                <label for="target3">
+                    <img src="/assets/target3.png" alt="target3" height="100">
+                </label>
+                <input type="radio" name="target" id="target3" value="3">
+            </div>
+        </div>
+        <div class="menu-button">
+            <button id="btnplay" class="button-play">Play</button>
+            <button id="btninstruction" class="button-instructions">Instruction</button>
+        </div>
+    </div>
+    <div id="intruction" class="intruction hide">
+        <button class="close-button" id="close-button">X</button>
+        <h1>How To Play Game</h1>
+        <h3>1. Input Username</h3>
+        <h3>2. Point The Pointer At The Target</h3>
+        <h3>3. Click To Shoot</h3>
+        <h3>4. Get as Many Point As Possible</h3>
+        <h3>5. Enjoy!</h3>
+    </div>
+    <div id="pause" class="pause hide">
+        <button class="close-button" id="close-pause-button">X</button>
+        <h1>Game sedang ter pause</h1>
+        <button class="continue-button" id="continue-button">Continue</button>
+    </div>
+    <div id="game-over" class="game-over hide">
+        <!-- <button class="close-button" id="close-pause-button">X</button> -->
+        <h1>Game Over</h1>
+        <h2>Silahkan pilih opsi untuk ke menu</h2>
+        <button class="return-button" id="return-button">Menu</button>
+    </div>
+    <div id="countdown" class="countdown hide">
+        <div class="countdown-number" id="countdown-number">3</div>
+    </div>
+    <div class="game-container hide">
+        <canvas id="canvas" width="1000" height="600"></canvas>
+        <div class="score-box">
+            <h1>Score</h1>
+        </div>
+    </div>
+</body>
+<script src="main.js"></script>
+</html>
