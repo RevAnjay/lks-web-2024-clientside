@@ -295,8 +295,8 @@ document.addEventListener('keydown', (e) => {
         pauseMenu.classList.add('hide');
     }
 
+    // BUAT TESTING
     if (e.key == "L") {
-
         username = "JalurAdmin";
         isImage1 = true
         level = 1;
@@ -362,17 +362,11 @@ canvas.addEventListener('click', (event) => {
 
 function isTabrakan(x, y, targetSize = 150) {
     // Cek dengan drawTarget
-    if (drawTarget.isVisible && Math.abs(x - drawTarget.x) < targetSize && Math.abs(y - drawTarget.y) < targetSize) {
-        return true;
-    }
+    if (drawTarget.isVisible && Math.abs(x - drawTarget.x) < targetSize && Math.abs(y - drawTarget.y) < targetSize) return;
     // Cek dengan drawTarget2
-    if (drawTarget2.isVisible && Math.abs(x - drawTarget2.x) < targetSize && Math.abs(y - drawTarget2.y) < targetSize) {
-        return true;
-    }
+    if (drawTarget2.isVisible && Math.abs(x - drawTarget2.x) < targetSize && Math.abs(y - drawTarget2.y) < targetSize) return;
     // Cek dengan drawTarget3
-    if (drawTarget3.isVisible && Math.abs(x - drawTarget3.x) < targetSize && Math.abs(y - drawTarget3.y) < targetSize) {
-        return true;
-    }
+    if (drawTarget3.isVisible && Math.abs(x - drawTarget3.x) < targetSize && Math.abs(y - drawTarget3.y) < targetSize) return;
 
     return false;
 }
@@ -478,6 +472,7 @@ function RunGame() {
     drawTarget2.draw();
     drawTarget3.draw();
 
+    // LANGSUNG MUNCULIN 3 TARGET DI AWAL PERMAINAN
     if (earlyGameStart) {
         let kordinat = generateRandomKordinat();
         let kordinat2 = generateRandomKordinat();
