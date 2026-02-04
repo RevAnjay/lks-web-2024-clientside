@@ -113,6 +113,7 @@ body {
     border-radius: 10px;
     color: white;
     background-color: green;
+    font-size: 30px;
 }
 
 .button-instructions {
@@ -122,6 +123,7 @@ body {
     color: white;
     background-color: blue;
     margin-left: 1rem;
+    font-size: 30px;
 }
 
 .hide {
@@ -137,6 +139,12 @@ body {
     color: white;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 9999;
+    margin-left: 5vw;
+    border-radius: 10px;
+}
+
+.how-to-play-title {
+    color: wheat;
 }
 
 .pause {
@@ -149,6 +157,9 @@ body {
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 99999;
     position: absolute;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 .continue-button {
@@ -157,14 +168,30 @@ body {
     border-radius: 10px;
     color: white;
     background-color: green;
-    margin-top: 45vh;
+    position: absolute;
+    margin-top: 60vh;
     font-size: 50px;
+}
+
+.close-button-pause {
+    position: absolute;
+    top: 170px;
+    right: 260px;
+    width: 30px;
+    height: 30px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .close-button {
     position: absolute;
-    top: 170px;
-    right: 310px;
+    top: 40px;
+    right: 40px;
     width: 30px;
     height: 30px;
     background-color: red;
@@ -192,6 +219,13 @@ body {
     align-items: center;
 }
 
+.game-over-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+}
+
 .return-button {
     padding: 0.5rem 2rem;
     border: none;
@@ -199,7 +233,15 @@ body {
     color: white;
     background-color: green;
     font-size: 50px;
-    margin-top: auto;
+    margin-left: 40px;
+}
+.save-button {
+    padding: 0.5rem 2rem;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    background-color: green;
+    font-size: 50px;
 }
 
 canvas {

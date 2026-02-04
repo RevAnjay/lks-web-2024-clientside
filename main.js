@@ -15,6 +15,7 @@ const returnButton = document.getElementById('return-button');
 const gameOverMenu = document.getElementById('game-over');
 const countdownElement = document.getElementById('countdown');
 const countdownNumber = document.getElementById('countdown-number');
+const saveScoreButton = document.getElementById('save-button');
 
 let isInstruction = false;
 let isGameOver = false;
@@ -29,6 +30,8 @@ let score = 0;
 let currentTarget = null;
 let earlyGameStart = false;
 let penguranganWaktu = false;
+let shooterLeaderboard = JSON.parse(localStorage.getItem('shooterLeaderboard')) || [];
+let timerInterval;
 
 // CANVAS
 const canvas = document.getElementById('canvas');
@@ -83,6 +86,8 @@ function drawScore() {
     ctx.beginPath();
     ctx.fillStyle = 'black';
     ctx.fillRect(1000, 0, 200, 600);
+    ctx.fillText('Score: ', 100, 0);
+    ctx.fillText('Score: ' + username, 100, 0);
     ctx.fillText('Score: ', 100, 0);
     ctx.closePath();
 }
@@ -227,7 +232,9 @@ const drawTarget3 = new targetClass3();
 function drawheader() {
         ctx.beginPath();
         ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+        ctx.globalAlpha = 0.5;
         ctx.fillRect(0, 0, 1000, 60);
+        ctx.globalAlpha = 1.0;
         ctx.font = '30px sans-serif';
         ctx.fillStyle = 'white';
         ctx.textAlign = 'center';
@@ -270,12 +277,20 @@ continueButton.addEventListener('click', () => {
 
 returnButton.addEventListener('click', () => {
     isGameOver = false;
-    // gameOverMenu.classList.add('hide');
-    // mainGame.classList.add('hide');
-    // mainMenu.classList.remove('hide');
-    // time = 30;
-    // score = 0;
-    location.reload();
+    gameOverMenu.classList.add('hide');
+    mainGame.classList.add('hide');
+    mainMenu.classList.remove('hide');
+    isInstruction = false;
+    isPaused = false;
+    isCountingDown = false;
+    currentGun = null;
+    isImage1 = null;
+    isGameRunning = false;
+    time = 30;
+    score = 0;
+    currentTarget = null;
+    earlyGameStart = false;
+    penguranganWaktu = false;
 });
 
 document.addEventListener('keydown', (e) => {
@@ -290,7 +305,7 @@ document.addEventListener('keydown', (e) => {
     if (e.key == "Escape" && !isInstruction && !isPaused && isGameRunning && !isGameOver && !isCountingDown) {
         isPaused = true;
         pauseMenu.classList.remove('hide');
-    } else if (e.key == "Escape" && !isInstruction && isPaused && isGameRunning && !isGameOver && !isc) {
+    } else if (e.key == "Escape" && !isInstruction && isPaused && isGameRunning && !isGameOver && !isCountingDown) {
         isPaused = false;
         pauseMenu.classList.add('hide');
     }
@@ -319,6 +334,25 @@ document.addEventListener('keydown', (e) => {
         startCountdown();
     }
 });
+
+saveScoreButton.addEventListener('click', () => {
+    let datas = {
+        username: username,
+        level: level,
+        score: score,
+        time: time,
+        date: new Date().toISOString('id-ID')
+    }
+
+    if (!Array.isArray(shooterLeaderboard)) {
+        shooterLeaderboard = [shooterLeaderboard];
+    }
+
+    shooterLeaderboard.push(datas);
+    localStorage.setItem('shooterLeaderboard', JSON.stringify(shooterLeaderboard));
+
+    alert('Data permainan berhasil disimpan!');
+})
 
 canvas.addEventListener('mousemove', (event) => {
     if (isPaused) return;
@@ -412,7 +446,11 @@ function startCountdown() {
 
 // TIMER
 function startTimer() {
-    setInterval(() => {
+    if (timerInterval) {
+        clearInterval(timerInterval);
+    }
+
+    timerInterval = setInterval(() => {
         if (time > 0 && !isPaused && isGameRunning && !isCountingDown && !penguranganWaktu) {
             time--
         }
@@ -438,19 +476,19 @@ function startTimer() {
             earlyGameStart = false;
         }
 
-        if (time % 5 === 0 && isGameRunning && !isGameOver) {
+        if (time % 3 === 0 && isGameRunning && !isGameOver && !isPaused) {
             earlyGameStart = false;
             let kordinat = generateRandomKordinat();
             console.log(kordinat);
             drawTarget.show(kordinat.x, kordinat.y)
         }
-        if (time % 5 === 0 && isGameRunning && !isGameOver) {
+        if (time % 3 === 0 && isGameRunning && !isGameOver && !isPaused) {
             earlyGameStart = false;
             let kordinat = generateRandomKordinat();
             console.log(kordinat);
             drawTarget2.show(kordinat.x, kordinat.y)
         }
-        if (time % 5 === 0 && isGameRunning && !isGameOver) {
+        if (time % 3 === 0 && isGameRunning && !isGameOver && !isPaused) {
             earlyGameStart = false;
             let kordinat = generateRandomKordinat();
             console.log(kordinat);
